@@ -36,6 +36,11 @@
   become: no
   connection: local
   tasks:
+  - name: Print hostvars
+    debug:
+      var: hostvars[item]
+      verbosity: 4
+    with_items: "{{ groups.oo_nodes_to_config }}"
   - name: Evaluate oo_containerized_master_nodes
     add_host:
       name: "{{ item }}"
